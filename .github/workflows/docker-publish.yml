@@ -30,10 +30,10 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: rnanfuka/dsci522-dockerfile-practice   
+          images: rnanfuka/dsci522-dockerfile-practice
           tags: |
-            type=raw,value={{sha}},enable=${{ github.ref_type != 'tag' }}
-            type=raw,value=latest
+            type=raw, value={{sha}},enable=${{github.ref_type != 'tag' }}
+            type=raw, value=latest
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
@@ -41,6 +41,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          platforms: linux/amd64,linux/arm64           
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
